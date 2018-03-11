@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class FirstTest {
     @Test
     public void firstTest() {
+
         System.setProperty("webdriver.chrome.driver", "/usr/local/share/chromedriver");
         ChromeDriver driver = new ChromeDriver();
 
