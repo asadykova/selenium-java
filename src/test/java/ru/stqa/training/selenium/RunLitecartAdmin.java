@@ -7,16 +7,17 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import static org.openqa.selenium.support.ui.ExpectedConditions.titleIs;
 
-public class FirstTest {
+public class RunLitecartAdmin {
 
     private WebDriver driver;
     private WebDriverWait wait;
 
     @Before
     public void start() {
-        /*System.setProperty("webdriver.chrome.driver", "/usr/local/share/chromedriver");*/
+
         driver = new ChromeDriver(); /*init драйвера */
         wait = new WebDriverWait(driver, 10);
     }
@@ -24,10 +25,12 @@ public class FirstTest {
     @Test
     public void firstTest() {
 
-        driver.get("https://www.google.com");
-        driver.findElement(By.name("q")).sendKeys("webdriver\n");
-        driver.findElement(By.name("btnG")).click();
-        wait.until(titleIs("webdriver - Google-мен іздеу"));
+        driver.get("http://localhost/litecart/admin");
+        wait.until(titleIs("My Store"));
+        driver.findElement(By.name("username")).sendKeys("admin");
+        driver.findElement(By.name("password")).sendKeys("admin");
+        driver.findElement(By.name("login")).click();
+
     }
 
     @After
