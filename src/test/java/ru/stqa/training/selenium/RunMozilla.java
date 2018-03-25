@@ -1,29 +1,18 @@
 package ru.stqa.training.selenium;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.HasCapabilities;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.NoSuchElementException;
-import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import static org.junit.Assert.assertTrue;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.titleIs;
 
-public class RunMozilla {
-
-    private WebDriver driver;
-    private WebDriverWait wait;
+public class RunMozilla extends MainClass {
 
     private boolean isElementPresent(By locator) {
         try {
@@ -37,17 +26,6 @@ public class RunMozilla {
     /*public boolean areElementsPresent(WebDriver driver, By locator) {
         return driver.findElements(locator).size() > 0;
     }*/
-
-    @Before
-    public void start() {
-
-        FirefoxOptions options = new FirefoxOptions()
-                .setLegacy(false);
-
-        driver = new FirefoxDriver(options); /*init драйвера */
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        wait = new WebDriverWait(driver, 10);
-    }
 
     @Test
     public void firstTest() {
@@ -81,9 +59,4 @@ public class RunMozilla {
         }
     }
 
-    @After
-    public void stop() {
-        driver.quit();
-        driver = null;
-    }
 }
