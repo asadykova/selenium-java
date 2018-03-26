@@ -11,7 +11,7 @@ import java.util.List;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.titleIs;
 
-public class CheckSortZones extends MainClass{
+public class CheckSortZones extends MainClass {
 
     @Test
     public void checkZonesName() {
@@ -26,63 +26,37 @@ public class CheckSortZones extends MainClass{
         int i;
         for (i = 0; i < country.size(); i++) {
             country = driver.findElements(By.cssSelector("#app- span.name"));
-
+            //идем на страницу геозон
             if (country.get(i).getAttribute("textContent").equals("Geo Zones")) {
                 country.get(i).click();
-            }
-            else {
+            } else {
                 continue;
             }
         }
-
-        WebElement content = driver.findElement(By.cssSelector("#content"));
-        List<WebElement> countries = content.findElements(By.cssSelector("tr.row"));
+        List<WebElement> zones = driver.findElements(By.cssSelector(".dataTable tr.row"));
         ArrayList<String> checkList = new ArrayList<String>();
 
-        for (WebElement rows:countries) {
-            List<WebElement> columns = rows.findElements(By.tagName("td"));
-            checkList.add(columns.get(4).getAttribute("textContent"));
-        }
-
-        ArrayList<String> sortedList = new ArrayList<String>();
-        for (String sorted:checkList
-             ) {
-            sortedList.add(sorted);
-        }
-        Collections.sort(sortedList);
-        Assert.assertTrue(sortedList.equals(checkList));
-
-        checkList.clear();
-        for (i = 0; i < countries.size(); i++) {
-            content = driver.findElement(By.cssSelector("#content"));
-            countries = content.findElements(By.cssSelector("tr.row"));
-            List<WebElement> columns = countries.get(i).findElements(By.tagName("td"));
-            if (columns.get(5).getAttribute("textContent").equals("0")){
-                continue;
+        for (i = 0; i < zones.size(); i++) {
+            checkList.clear();
+            List<WebElement> aa = driver.findElements(By.cssSelector(".dataTable tr.row"));
+            List<WebElement> aa1 = aa.get(i).findElements(By.tagName("td"));
+            //для каждой страны идем на его страницу
+            aa1.get(2).findElement(By.tagName("a")).click();
+            List<WebElement> zones1 = driver.findElements(By.cssSelector("#table-zones.dataTable tr:not(.header)"));
+            int j;
+            for (j = 0; j < zones1.size()-1; j++) {
+                List<WebElement> nameZones = zones1.get(j).findElements(By.tagName("td"));
+                //добавляем наименование каждой зоны в массив
+                checkList.add(nameZones.get(2).findElement(By.cssSelector("[selected=selected]")).getAttribute("textContent"));
             }
-            else {
-                columns.get(4).findElement(By.tagName("a")).click();
-
-                List<WebElement> zones = driver.findElements(By.cssSelector("#table-zones.dataTable tr:not(.header)"));
-                for (i = 0; i < zones.size() - 1; i++) {
-                    List<WebElement> columns1 = zones.get(i).findElements(By.tagName("td"));
-                    System.out.print(columns1.get(2).getAttribute("textContent"));
-                    System.out.print("\n");
-                    /*checkList.add(columns1.get(2).getAttribute("textContent"));*/
-                }
-                driver.navigate().back();
+            ArrayList<String> sortedList = new ArrayList<String>();
+            for (String sorted:checkList) {
+                sortedList.add(sorted);
             }
+            Collections.sort(sortedList);
+            //сравниваем
+            Assert.assertTrue(sortedList.equals(checkList));
+            driver.navigate().back();
         }
-        for (String sorted:checkList
-                ) {
-            sortedList.add(sorted);
-        }
-        Collections.sort(sortedList);
-        System.out.print(sortedList);
-        System.out.print("\n");
-        System.out.print(checkList);
-        System.out.print("\n");
-        Assert.assertTrue(sortedList.equals(checkList));
     }
-
 }
