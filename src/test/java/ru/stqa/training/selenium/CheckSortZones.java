@@ -11,10 +11,10 @@ import java.util.List;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.titleIs;
 
-public class AlphabeticalSort extends MainClass {
+public class CheckSortZones extends MainClass{
 
     @Test
-    public void checkCountryName() {
+    public void checkZonesName() {
 
         driver.get("http://localhost/litecart/admin");
         wait.until(titleIs("My Store"));
@@ -27,7 +27,7 @@ public class AlphabeticalSort extends MainClass {
         for (i = 0; i < country.size(); i++) {
             country = driver.findElements(By.cssSelector("#app- span.name"));
 
-            if (country.get(i).getAttribute("textContent").equals("Countries")) {
+            if (country.get(i).getAttribute("textContent").equals("Geo Zones")) {
                 country.get(i).click();
             }
             else {
@@ -39,18 +39,20 @@ public class AlphabeticalSort extends MainClass {
         List<WebElement> countries = content.findElements(By.cssSelector("tr.row"));
         ArrayList<String> checkList = new ArrayList<String>();
 
-        /*for (WebElement rows:countries) {
+        for (WebElement rows:countries) {
             List<WebElement> columns = rows.findElements(By.tagName("td"));
             checkList.add(columns.get(4).getAttribute("textContent"));
         }
-*/
+
         ArrayList<String> sortedList = new ArrayList<String>();
-        /*for (String sorted:checkList
+        for (String sorted:checkList
              ) {
             sortedList.add(sorted);
         }
         Collections.sort(sortedList);
-        Assert.assertTrue(sortedList.equals(checkList));*/
+        Assert.assertTrue(sortedList.equals(checkList));
+
+        checkList.clear();
         for (i = 0; i < countries.size(); i++) {
             content = driver.findElement(By.cssSelector("#content"));
             countries = content.findElements(By.cssSelector("tr.row"));
@@ -68,8 +70,7 @@ public class AlphabeticalSort extends MainClass {
                     System.out.print("\n");
                     /*checkList.add(columns1.get(2).getAttribute("textContent"));*/
                 }
-                WebElement cancel = driver.findElement(By.cssSelector(".button-set [name=cancel]"));
-                cancel.click();
+                driver.navigate().back();
             }
         }
         for (String sorted:checkList
@@ -83,4 +84,5 @@ public class AlphabeticalSort extends MainClass {
         System.out.print("\n");
         Assert.assertTrue(sortedList.equals(checkList));
     }
+
 }
