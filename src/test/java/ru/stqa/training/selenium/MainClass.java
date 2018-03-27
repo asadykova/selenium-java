@@ -19,7 +19,7 @@ public class MainClass {
     @Before
     public void start() {
 
-        /*FirefoxOptions options = new FirefoxOptions()
+       /* FirefoxOptions options = new FirefoxOptions()
                 .setLegacy(false);
 
         driver = new FirefoxDriver(options); /*init драйвера */
