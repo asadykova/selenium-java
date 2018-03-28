@@ -19,11 +19,11 @@ public class MainClass {
     @Before
     public void start() {
 
-       /* FirefoxOptions options = new FirefoxOptions()
+        FirefoxOptions options = new FirefoxOptions()
                 .setLegacy(false);
 
         driver = new FirefoxDriver(options); /*init драйвера */
-        driver = new ChromeDriver();
+        //driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         wait = new WebDriverWait(driver, 10);
     }
