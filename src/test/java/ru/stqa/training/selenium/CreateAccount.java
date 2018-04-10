@@ -23,25 +23,30 @@ public class CreateAccount extends MainClass {
         WebElement newAccount = driver.findElement(By.cssSelector("#box-account-login div.content tr:last-child"));
         newAccount.click();
 
-        List<WebElement> account = driver.findElements(By.cssSelector("#create-account div.content tr"));
-        WebElement firstName = account.get(1).findElement(By.cssSelector("[name=firstname]"));
-        firstName.sendKeys("Aida" + Keys.TAB + "Sadykova" + Keys.TAB
-        + "Abay st." + Keys.TAB + Keys.TAB + "00057" + Keys.TAB + "New York");
+        WebElement account = driver.findElement(By.cssSelector("#create-account div.content"));
+        account.findElement(By.name("firstname")).sendKeys("Aida");
+        account.findElement(By.name("lastname")).sendKeys("Sadykova");
+        account.findElement(By.name("address1")).sendKeys("Abay st.");
+        account.findElement(By.name("postcode")).sendKeys("00057");
+        account.findElement(By.name("city")).sendKeys("New York");
         WebElement country = driver.findElement(By.cssSelector(".select2"));
         country.click();
         WebElement ff = driver.findElement(By.cssSelector(".select2-search__field"));
         ff.sendKeys("United States" + Keys.ENTER);
-        WebElement state = account.get(4).findElement(By.cssSelector("select[name=zone_code]"));
+        WebElement state = account.findElement(By.name("zone_code"));
         Select stateName = new Select(state);
         stateName.selectByVisibleText("Arizona");
 
 
-        WebElement email = account.get(5).findElement(By.cssSelector("[name=email]"));
         Date d = new Date();
         String randomString = "asadykova_" + d.getDate() + d.getTime() + "@mail.com";
-        System.out.print(randomString);
-        email.sendKeys(randomString + Keys.TAB + "+77777777777" + Keys.TAB
-        + Keys.SPACE + Keys.TAB + "123456" + Keys.TAB + "123456" + Keys.TAB + Keys.ENTER);
+        account.findElement(By.name("email")).sendKeys(randomString);
+
+        account.findElement(By.name("phone")).sendKeys("+77777777777");
+        account.findElement(By.name("newsletter")).click();
+        account.findElement(By.name("password")).sendKeys("123456");
+        account.findElement(By.name("confirmed_password")).sendKeys("123456");
+        account.findElement(By.cssSelector("button[name=create_account]")).click();
 
         //выход
         WebElement logOut = driver.findElement(By.cssSelector("#box-account div.content li:last-child a"));

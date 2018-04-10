@@ -53,7 +53,7 @@ public class MainClass {
         /*FirefoxOptions options = new FirefoxOptions()
                 .setLegacy(false);
 
-        driver = new FirefoxDriver(options); /*init драйвера */
+        driver = new EventFiringWebDriver(new FirefoxDriver(options)); /*init драйвера */
         driver = new EventFiringWebDriver(new ChromeDriver(cap));
        // driver.register(new MyListener());
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
