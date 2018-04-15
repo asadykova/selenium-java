@@ -32,7 +32,7 @@ public class MainClass {
 
         @Override
         public void afterFindBy(By by, WebElement element, WebDriver driver) {
-            System.out.print(by + "found" + "\n");
+            System.out.print(by + " found" + "\n");
         }
 
         @Override
@@ -55,7 +55,7 @@ public class MainClass {
 
         driver = new EventFiringWebDriver(new FirefoxDriver(options)); /*init драйвера */
         driver = new EventFiringWebDriver(new ChromeDriver(cap));
-       // driver.register(new MyListener());
+        driver.register(new MyListener());
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         wait = new WebDriverWait(driver, 10);
         driver.manage().window().maximize();
